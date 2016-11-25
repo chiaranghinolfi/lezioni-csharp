@@ -24,7 +24,6 @@ namespace TestClassi
 
             //textBox1.Text = m2.describe();
             m.describe(textBox1);
-           
         }
     }
 }

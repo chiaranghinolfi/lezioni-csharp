@@ -28,11 +28,7 @@ namespace TestClassi
 
         public void describe(TextBox t)
         {
-            string output = "Questo è " + name + "\r\n";
-            output += "HP: " + hp + "\r\n";
-            output += "DAMAGE: " + damage + "\r\n";
-
-            t.Text = output;
+            t.Text = describe();
         }
     }
 }
