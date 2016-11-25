@@ -21,6 +21,10 @@ namespace TestClassi
         {
             Monster m = new Monster("Strongbonna", 10, 50);
             Monster m2 = new Monster("Tizio", 56, 10);
+
+            //textBox1.Text = m2.describe();
+            m.describe(textBox1);
+           
         }
     }
 }

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace TestClassi
 {
@@ -20,11 +17,22 @@ namespace TestClassi
             describe();
         }
 
-        public void describe()
+        public string describe()
         {
-            Console.WriteLine("Questo è " + name);
-            Console.WriteLine("HP: " + hp);
-            Console.WriteLine("DAMAGE: " + damage);
+            string output = "Questo è " + name + "\r\n";
+            output += "HP: " + hp + "\r\n";
+            output += "DAMAGE: " + damage + "\r\n";
+
+            return output;
+        }
+
+        public void describe(TextBox t)
+        {
+            string output = "Questo è " + name + "\r\n";
+            output += "HP: " + hp + "\r\n";
+            output += "DAMAGE: " + damage + "\r\n";
+
+            t.Text = output;
         }
     }
 }
