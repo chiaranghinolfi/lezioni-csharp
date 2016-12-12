@@ -21,7 +21,6 @@ namespace TestClassi
         {
             Monster strongbonna = new Monster("Strongbonna", 100, 20);
             Monster charmender = new Monster("Charmender", 60, 20, 10);
-
             strongbonna.attack(charmender);
             charmender.attack(strongbonna);
             strongbonna.heal();

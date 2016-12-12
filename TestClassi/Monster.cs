@@ -10,12 +10,9 @@ namespace TestClassi
 
         private int _maxHp;
         public int maxHp
-        {
-            get
-            {
-                return _maxHp;
-            }
-        }
+        { get { return _maxHp; } }
+
+        public bool alive { get { return curHp > 0; } }
 
         private int _curHp;
         public int curHp
@@ -26,15 +23,24 @@ namespace TestClassi
                 _curHp = value;
             }
 
+            get { return _curHp; }
+        }
+
+        private int _damage;
+        public int damage { get { return _damage; } }
+
+        private int _healFactor;
+        public int healFactor {
             get
             {
-                return _curHp;
+                return _healFactor;
+            }
+            set
+            {
+                _healFactor = value;
             }
         }
 
-        public int damage;
-        public int healFactor;
-        
         public Monster(string name, int maxHp, int damage, int healFactor = 0)
         {
             _name = name;
@@ -44,15 +50,18 @@ namespace TestClassi
 
             curHp = maxHp;
 
-            this.damage = damage;
+            if (damage < 0) damage = 0;
+            _damage = damage;
+
             this.healFactor = healFactor;
+            Console.WriteLine("test " + _healFactor);
             describe();
         }
 
         public string describe()
         {
             string output = "Questo è " + name + "\r\n";
-            output += "HP: " + _curHp + "\r\n";
+            output += "HP: " + curHp + "\r\n";
             output += "DAMAGE: " + damage + "\r\n";
 
             return output;
@@ -71,27 +80,27 @@ namespace TestClassi
                 return;
             }
 
-            if (_curHp <= 0)
+            if (curHp <= 0)
             {
                 Console.WriteLine("Non puoi curare nessuno da morto");
                 return;
             }
 
-            if (target._curHp <= 0)
+            if (target.curHp <= 0)
             {
                 Console.WriteLine(target.name + " è esausto e non puoi resuscitarlo con la cura.");
                 return;
             }
 
-            target._curHp += healFactor;
+            target.curHp += healFactor;
 
-            if (target._curHp > target._maxHp)
+            if (target.curHp > target.maxHp)
             {
-                target._curHp = target._maxHp;
+                target.curHp = target.maxHp;
             }
 
             Console.WriteLine(name + " usa cura su " + target.name);
-            Console.WriteLine(target.name + " è stato curato e ora ha " + target._curHp + "/" + target._maxHp + " HP");
+            Console.WriteLine(target.name + " è stato curato e ora ha " + target.curHp + "/" + target.maxHp + " HP");
         }
 
         public void heal()
@@ -101,13 +110,13 @@ namespace TestClassi
 
         public void attack(Monster target)
         {
-            if (_curHp <= 0)
+            if (!alive)
             {
                 Console.WriteLine("Non puoi attaccare nessuno da morto");
                 return;
             }
 
-            if (target._curHp <= 0)
+            if (!target.alive)
             {
                 Console.WriteLine(target.name + " è già esausto, non infierire.");
                 return;
@@ -115,15 +124,15 @@ namespace TestClassi
 
             Console.WriteLine(name + " attacca " + target.name);
             Console.WriteLine(name + " fa " + damage + " danni a " + target.name);
-            target._curHp -= damage;
+            target.curHp -= damage;
             
-            if (target._curHp <= 0 )
+            if (!target.alive)
             {
-                target._curHp = 0;
+                target.curHp = 0;
                 Console.WriteLine(target.name + " è esausto.");
             } else
             {
-                Console.WriteLine("a " + target.name + " rimangono " + target._curHp + " hp");
+                Console.WriteLine("a " + target.name + " rimangono " + target.curHp + " hp");
             }
         }
     }
