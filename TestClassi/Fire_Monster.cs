@@ -14,5 +14,19 @@ namespace TestClassi
         {
             this.fireDamage = fireDamage;
         }
+
+        public override void attack(Monster target)
+        {
+            base.attack(target);
+            
+            if (alive && target.alive)
+            {
+                Console.WriteLine("Fai " + fireDamage + " ulteriori danni da fuoco a " + target.name);
+                target.curHp -= fireDamage;
+                Console.WriteLine(target.name + " rimane con " + target.status);
+            }
+            
+        }   
     }
 }
+
